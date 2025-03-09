@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useAlertStore } from '../stores/AlertStore';
+import { useAlertStore } from '../stores/alertStore';
 
 export const useAlert = () => {
   const { addAlert } = useAlertStore();

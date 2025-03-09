@@ -1,7 +1,8 @@
 import React from 'react';
 import { Alert } from 'antd';
 import styled, { keyframes } from 'styled-components';
-import { useAlertStore } from '../../stores/AlertStore';
+import { useAlertStore } from '../../stores/alertStore';
+
 
 const slideIn = keyframes`
   from {
