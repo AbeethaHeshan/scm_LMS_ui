@@ -6,11 +6,11 @@ import { useAlertStore } from '../../stores/alertStore';
 const slideIn = keyframes`
   from {
     opacity: 0;
-    transform: translateY(30px) scale(0.8);
+    transform: translateX(30px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateX(0);
   }
 `;
 
@@ -31,7 +31,7 @@ const AnimatedAlertWrapper = styled.div`
   
   &.alert-exit {
     opacity: 0;
-    transform: translateY(20px) scale(0.8);
+    transform: translateX(30px);
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
 `;
