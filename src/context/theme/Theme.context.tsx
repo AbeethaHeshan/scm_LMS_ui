@@ -1,11 +1,10 @@
+// Theme.context.tsx
 import React, { createContext, useContext, useState, useEffect, useMemo, ReactNode } from 'react';
 import { ConfigProvider } from 'antd';
 import { lightTheme, darkTheme, fontSizes, fontFamilies } from '../../configs/theme.config';
 
-// Define Theme Modes
 type ThemeMode = 'light' | 'dark';
 
-// Define Theme Context Type
 interface ThemeContextType {
   theme: ThemeMode;
   toggleTheme: () => void;
@@ -14,19 +13,16 @@ interface ThemeContextType {
   fontFamilies: typeof fontFamilies;
 }
 
-// Create Context with default values
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-// Custom Hook to use Theme Context
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
 };
 
-// Custom Hook to handle theme state and localStorage
 const useThemeState = (defaultTheme: ThemeMode) => {
   const [theme, setTheme] = useState<ThemeMode>(() => {
     const savedTheme = localStorage.getItem('theme') as ThemeMode | null;
@@ -43,16 +39,17 @@ const useThemeState = (defaultTheme: ThemeMode) => {
   return { theme, setTheme, toggleTheme };
 };
 
-// Theme Provider Component
 interface ThemeProviderProps {
   children: ReactNode;
   defaultTheme?: ThemeMode;
 }
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, defaultTheme = 'light' }) => {
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({
+  children,
+  defaultTheme = 'light',
+}) => {
   const { theme, setTheme, toggleTheme } = useThemeState(defaultTheme);
 
-  // Memoized Theme Configuration
   const currentTheme = useMemo(() => (theme === 'light' ? lightTheme : darkTheme), [theme]);
 
   return (

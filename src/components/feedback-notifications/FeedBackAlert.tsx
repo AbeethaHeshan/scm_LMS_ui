@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert } from 'antd';
 import styled, { keyframes } from 'styled-components';
-import { useAlertStore } from '../../stores/alertStore';
+import { useAlertStore } from '../../stores/AlertStore';
 
 const slideIn = keyframes`
   from {
@@ -28,11 +28,13 @@ const AlertContainer = styled.div`
 const AnimatedAlertWrapper = styled.div`
   width: 100%;
   animation: ${slideIn} 0.3s ease forwards;
-  
+
   &.alert-exit {
     opacity: 0;
     transform: translateX(30px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
   }
 `;
 
@@ -43,7 +45,7 @@ export const FeedBackAlert: React.FC = () => {
     const alertElement = document.getElementById(`alert-${id}`);
     if (alertElement) {
       alertElement.classList.add('alert-exit');
-      
+
       setTimeout(() => {
         removeAlert(id);
       }, 300);
