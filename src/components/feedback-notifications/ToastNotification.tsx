@@ -38,7 +38,7 @@ const AnimatedAlertWrapper = styled.div`
   }
 `;
 
-export const FeedBackAlert: React.FC = () => {
+export const ToastNotification: React.FC = () => {
   const { alerts, removeAlert } = useAlertStore();
 
   const handleClose = (id: string) => {
