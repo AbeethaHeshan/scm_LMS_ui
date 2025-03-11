@@ -1,6 +1,4 @@
 import { Button, Select } from 'antd';
-import Title from 'antd/es/skeleton/Title';
-import React from 'react';
 import { useTheme } from '../context/theme/Theme.context';
 import { useAlert } from '../hooks/useAlert';
 const Option = Select.Option;
@@ -44,6 +42,7 @@ export default function Test({}: Props) {
         <Option value="tom">Tom</Option>
       </Select>
       <button onClick={() => showSuccess('Operation completed successfully!')}>Show Success</button>
+      <button onClick={() => showError('Operation ERROR')}>Show ERROR</button>
     </div>
   );
 }
