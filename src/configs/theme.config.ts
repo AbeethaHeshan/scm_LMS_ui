@@ -1,6 +1,16 @@
 import { ThemeConfig } from 'antd';
 import { Theme } from 'antd/es/config-provider/context';
 
+// Define brand colors
+export const brandColors = {
+  primary: '#CA3C75',
+  secondary: '#6A1B9A',
+  success: '#1FAA59',
+  warning: '#FFC107',
+  error: '#E53935',
+  info: '#29B6F6'
+};
+
 export interface CustomToken extends Theme {
   borderRadius: number;
   fontSizes: {
@@ -17,73 +27,123 @@ export interface CustomToken extends Theme {
   };
 }
 
-// Light theme configuration
+// Light Theme Config
 export const lightTheme: ThemeConfig = {
   token: {
-    colorPrimary: '#A020F0', // Primary color
-    colorSuccess: '#52c41a', // Success color
-    colorWarning: '#faad14', // Warning color
-    colorError: '#ff4d4f', // Error/danger color
-    colorInfo: '#1677ff', // Info color
-    colorTextBase: '#000000', // Base text color
-    colorBgBase: '#ffffff', // Base background color
+    //Primary Color
+    colorPrimary: brandColors.primary, // Main branding color (Pink)
 
-    // Secondary colors
-    // colorSecondary: '#722ed1', // Purple as secondary
+    // Status Colors
+    colorSuccess: brandColors.success, // Success Green
+    colorWarning: brandColors.warning, // Warning Yellow
+    colorError: brandColors.error, // Danger Red
+    colorInfo: brandColors.info, // Info Blue
 
-    // Fonts
+    //Text Colors
+    colorTextBase: '#212121', // Default text color
+    colorTextHeading: '#1A1A1A', // Heading text
+    colorTextSecondary: '#616161', // Secondary text (muted)
+
+    //Background Colors
+    colorBgBase: '#F5F5F5', // Page background
+    colorBgContainer: '#FFFFFF', // Containers (Cards, Inputs, Modals)
+    colorBgElevated: '#FFFFFF', // Popups, Dropdowns
+    colorBorder: '#DDDDDD', // Border color
+
+    //Typography
     fontFamily: "'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
     fontSize: 14,
 
-    // Border radius
+    //Border radius
     borderRadius: 4,
   },
   components: {
     Button: {
       borderRadius: 4,
       controlHeight: 36,
+      colorText: '#FFFFFF',
+      colorPrimary: brandColors.primary,
+      colorPrimaryHover: '#B82C66',
+      // Use for secondary buttons within component specific overrides
+      // This is allowed in component configurations
+      colorBgTextHover: brandColors.secondary,
     },
     Card: {
       borderRadius: 8,
+      colorBgContainer: '#FFFFFF',
+      colorBorder: '#E0E0E0',
     },
-    // Add component-specific overrides as needed
+    Input: {
+      colorText: '#212121',
+      colorBgContainer: '#FFFFFF',
+      colorBorder: '#CCCCCC',
+      colorTextPlaceholder: '#888888',
+    },
+    Table: {
+      colorBgContainer: '#FFFFFF',
+      colorBorder: '#E0E0E0',
+    },
   },
 };
 
-// Dark theme configuration
+// Dark Theme Config
 export const darkTheme: ThemeConfig = {
   token: {
-    colorPrimary: '#177ddc', // Primary color for dark mode
-    colorSuccess: '#49aa19', // Success color for dark mode
-    colorWarning: '#d89614', // Warning color for dark mode
-    colorError: '#a61d24', // Error/danger color for dark mode
-    colorInfo: '#177ddc', // Info color for dark mode
-    colorTextBase: '#ffffff', // Base text color for dark mode
-    colorBgBase: '#141414', // Base background color for dark mode
+    //Primary Color
+    colorPrimary: brandColors.primary, // Keep primary color consistent
 
-    // Secondary colors
-    // colorSecondary: '#9254de', // Purple as secondary for dark mode
+    //Status Colors
+    colorSuccess: brandColors.success, // Success Green
+    colorWarning: brandColors.warning, // Warning Yellow
+    colorError: brandColors.error, // Danger Red
+    colorInfo: brandColors.info, // Info Blue
 
-    // Same font configuration
+    //Text Colors
+    colorTextBase: '#FFFFFF', // Default white text
+    colorTextHeading: '#FAFAFA', // Heading text
+    colorTextSecondary: '#B0B0B0', // Muted text
+
+    //Background Colors
+    colorBgBase: '#1E1E1E', // Page background (dark)
+    colorBgContainer: '#2A2A2A', // Containers (Cards, Inputs, Modals)
+    colorBgElevated: '#2A2A2A', // Popups, Dropdowns
+    colorBorder: '#444444', // Darker border color
+
+    //Typography
     fontFamily: "'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
     fontSize: 14,
 
-    // Border radius
+    //Border radius
     borderRadius: 4,
   },
   components: {
     Button: {
       borderRadius: 4,
       controlHeight: 36,
+      colorText: '#FFFFFF',
+      colorPrimary: brandColors.primary,
+      colorPrimaryHover: '#B82C66',
+      colorBgTextHover: brandColors.secondary,
     },
     Card: {
       borderRadius: 8,
+      colorBgContainer: '#252525',
+      colorBorder: '#333333',
     },
-    // Add component-specific overrides as needed
+    Input: {
+      colorText: '#FFFFFF',
+      colorBgContainer: '#2A2A2A',
+      colorBorder: '#555555',
+      colorTextPlaceholder: '#999999',
+    },
+    Table: {
+      colorBgContainer: '#2A2A2A',
+      colorBorder: '#444444',
+    },
   },
 };
 
-// Custom font sizes for global usage
+//Global Font Sizes
 export const fontSizes = {
   xs: 12,
   sm: 14,
@@ -93,8 +153,12 @@ export const fontSizes = {
   xxl: 24,
 };
 
-// Custom font families for global usage
+// Global Font Families
 export const fontFamilies = {
   primary: "'Roboto', sans-serif",
   secondary: "'Open Sans', sans-serif",
+};
+
+export const getSecondaryColor = (isDarkMode: boolean = false): string => {
+  return brandColors.secondary;
 };
