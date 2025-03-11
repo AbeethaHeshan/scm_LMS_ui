@@ -6,10 +6,10 @@ import { useAlert } from '../hooks/useAlert';
 const Option = Select.Option;
 type Props = {};
 
-export default function Test({}: Props) {
+export default function Test({ }: Props) {
   const te = useTheme();
   console.log(te);
-  const { showSuccess, showError } = useAlert();
+  const { showSuccess, showError, showInfo, showWarning } = useAlert();
 
   function handleChange(value) {
     console.log(`selected ${value}`);
@@ -24,7 +24,7 @@ export default function Test({}: Props) {
   }
 
   return (
-    <div>
+    <div >
       Test For the Theme
       <Button type="primary">Primary Button</Button>
       <Select
@@ -44,6 +44,9 @@ export default function Test({}: Props) {
         <Option value="tom">Tom</Option>
       </Select>
       <button onClick={() => showSuccess('Operation completed successfully!')}>Show Success</button>
+      <button onClick={() => showError('Operation completed error')}>Show error</button>
+      <button onClick={() => showInfo('Operation completed infi')}>Show info</button>
+      <button onClick={() => showWarning('Operation completed warming')}> show Warning</button>
     </div>
   );
 }
