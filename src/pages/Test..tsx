@@ -44,7 +44,7 @@ export default function Test({ }: Props) {
               required: true,
               phone: true,
             })}
-            error={errors.textField}
+            error={errors.phone}
           />
 
           <TextField
