@@ -11,7 +11,7 @@ type ValidationRules = {
 };
 
 class Validation {
-    static for(register: UseFormRegister<any>, fieldName: string, rules: ValidationRules) {
+    static apply(register: UseFormRegister<any>, fieldName: string, rules: ValidationRules) {
         const validationRules: RegisterOptions = { ...Validation.buildRules(fieldName, rules) };
         return register(fieldName, validationRules);
     }

@@ -40,7 +40,7 @@ export default function Test({ }: Props) {
           <TextField
             control={control}
             label="Phone Number"
-            {...Validation.for(register, "phone", {
+            {...Validation.apply(register, "phone", {
               required: true,
               phone: true,
             })}
@@ -50,7 +50,7 @@ export default function Test({ }: Props) {
           <TextField
             control={control}
             label="Email"
-            {...Validation.for(register, "email", {
+            {...Validation.apply(register, "email", {
               required: true,
               email: true,
             })}
@@ -60,7 +60,7 @@ export default function Test({ }: Props) {
           <TextField
             control={control}
             label="Age"
-            {...Validation.for(register, "age", {
+            {...Validation.apply(register, "age", {
               required: true,
               onlyNumbers: true,
               range: { min: 18, max: 100 }
