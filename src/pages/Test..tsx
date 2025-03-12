@@ -1,12 +1,18 @@
 import { Button, Select } from 'antd';
 import { useTheme } from '../context/theme/Theme.context';
 import { useAlert } from '../hooks/useAlert';
+import TextField from '../components/inputs/TextField';
+import { RegisterOptions, FieldValues, UseFormRegisterReturn } from 'react-hook-form';
 const Option = Select.Option;
 type Props = {};
+import { useForm } from 'react-hook-form'
+import Validation from '../utils/Validations';
 
-export default function Test({}: Props) {
+
+export default function Test({ }: Props) {
   const te = useTheme();
-  console.log(te);
+
+  const { register, handleSubmit, formState: { errors }, control } = useForm({})
   const { showSuccess, showError } = useAlert();
 
   function handleChange(value) {
@@ -21,28 +27,50 @@ export default function Test({}: Props) {
     console.log('focus');
   }
 
+  const onSubmit = (data: any) => {
+    console.log('Form data:', data)
+  }
+
   return (
     <div>
-      Test For the Theme
-      <Button type="primary">Primary Button</Button>
-      <Select
-        showSearch
-        style={{ width: 200 }}
-        placeholder="Select a person"
-        optionFilterProp="children"
-        onChange={handleChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        filterOption={(input, option) =>
-          option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-      >
-        <Option value="jack">Jack</Option>
-        <Option value="lucy">Lucy</Option>
-        <Option value="tom">Tom</Option>
-      </Select>
-      <button onClick={() => showSuccess('Operation completed successfully!')}>Show Success</button>
-      <button onClick={() => showError('Operation ERROR')}>Show ERROR</button>
+      <div>
+        <h2>Form Validation Example</h2>
+
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            control={control}
+            label="Phone Number"
+            {...Validation.for(register, "phone", {
+              required: true,
+              phone: true,
+            })}
+            error={errors.textField}
+          />
+
+          <TextField
+            control={control}
+            label="Email"
+            {...Validation.for(register, "email", {
+              required: true,
+              email: true,
+            })}
+            error={errors.email}
+          />
+
+          <TextField
+            control={control}
+            label="Age"
+            {...Validation.for(register, "age", {
+              required: true,
+              onlyNumbers: true,
+              range: { min: 18, max: 100 }
+            })}
+            error={errors.age}
+          />
+
+          <Button type="primary" htmlType="submit">Submit</Button>
+        </form>
+      </div>
     </div>
   );
 }

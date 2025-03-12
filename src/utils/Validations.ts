@@ -1,4 +1,4 @@
-import { UseFormRegister } from "react-hook-form";
+import { RegisterOptions, UseFormRegister } from "react-hook-form";
 
 type ValidationRules = {
     required?: boolean;
@@ -12,50 +12,54 @@ type ValidationRules = {
 
 class Validation {
     static for(register: UseFormRegister<any>, fieldName: string, rules: ValidationRules) {
-        const validationRules: Record<string, any> = {};
-
-        if (rules.required) validationRules.required = Validation.getRequiredMessage(fieldName);
-        if (rules.range) Object.assign(validationRules, Validation.getRangeMessages(fieldName, rules.range));
-        if (rules.pattern) validationRules.pattern = Validation.getPatternMessage(fieldName, rules.pattern);
-        if (rules.email) validationRules.pattern = Validation.getEmailMessage(fieldName);
-        if (rules.phone) validationRules.pattern = Validation.getPhoneMessage(fieldName);
-        if (rules.onlyLetters) validationRules.pattern = Validation.getOnlyLettersMessage(fieldName);
-        if (rules.onlyNumbers) validationRules.pattern = Validation.getOnlyNumbersMessage(fieldName);
-
+        const validationRules: RegisterOptions = { ...Validation.buildRules(fieldName, rules) };
         return register(fieldName, validationRules);
     }
 
-    private static getRequiredMessage(fieldName: string) {
-        return `${fieldName} is required`;
+    private static buildRules(fieldName: string, rules: ValidationRules): RegisterOptions {
+        const validationRules: RegisterOptions = {};
+        const formattedFieldName = Validation.capitalize(fieldName);
+
+        if (rules.required) {
+            validationRules.required = `${formattedFieldName} is required`;
+        }
+
+        if (rules.range) {
+            Object.assign(validationRules, Validation.getRangeRules(formattedFieldName, rules.range));
+        }
+
+        if (rules.onlyNumbers) {
+            validationRules.pattern = Validation.getPatternRule(/^[0-9]+$/, `${formattedFieldName} must contain only numbers`);
+        } else if (rules.onlyLetters) {
+            validationRules.pattern = Validation.getPatternRule(/^[A-Za-z]+$/, `${formattedFieldName} must contain only letters`);
+        } else if (rules.phone) {
+            validationRules.pattern = Validation.getPatternRule(/^[0-9]{10}$/, `${formattedFieldName} must be a valid phone number (10 digits)`);
+        } else if (rules.email) {
+            validationRules.pattern = Validation.getPatternRule(/^[^@]+@[^@]+\.[^@]+$/, `${formattedFieldName} must be a valid email address`);
+        } else if (rules.pattern) {
+            validationRules.pattern = Validation.getPatternRule(rules.pattern.value, rules.pattern.message || `${formattedFieldName} has an invalid format`);
+        }
+
+        return validationRules;
     }
 
-    private static getRangeMessages(fieldName: string, range: { min?: number; max?: number }) {
-        const messages: Record<string, any> = {};
-        if (range.min !== undefined) messages.min = { value: range.min, message: `${fieldName} must be at least ${range.min}` };
-        if (range.max !== undefined) messages.max = { value: range.max, message: `${fieldName} must be at most ${range.max}` };
-        return messages;
+    private static getRangeRules(fieldName: string, range: { min?: number; max?: number }): RegisterOptions {
+        const rangeRules: RegisterOptions = {};
+        if (range.min !== undefined) {
+            rangeRules.min = { value: range.min, message: `${fieldName} must be at least ${range.min}` };
+        }
+        if (range.max !== undefined) {
+            rangeRules.max = { value: range.max, message: `${fieldName} must be at most ${range.max}` };
+        }
+        return rangeRules;
     }
 
-    private static getPatternMessage(fieldName: string, pattern: { value: RegExp; message?: string }) {
-        return { value: pattern.value, message: pattern.message || `${fieldName} has an invalid format` };
+    private static getPatternRule(value: RegExp, message: string) {
+        return { value, message };
     }
 
-    private static getEmailMessage(fieldName: string) {
-        return { value: /^[^@]+@[^@]+\.[^@]+$/, message: `${fieldName} must be a valid email address` };
-    }
-
-    private static getPhoneMessage(fieldName: string) {
-        return { value: /^[0-9]{10}$/, message: `${fieldName} must be a valid phone number (10 digits)` };
-    }
-
-    private static getOnlyLettersMessage(fieldName: string) {
-        const letterPattern = /^[A-Za-z]+$/
-        return { value: letterPattern, message: `${fieldName} must be a valid phone number (10 digits)` };
-    }
-
-    private static getOnlyNumbersMessage(fieldName: string) {
-        const letterPattern = /^[0-9]+$/
-        return { value: letterPattern, message: `${fieldName} must be a valid phone number (10 digits)` };
+    private static capitalize(text: string): string {
+        return text.replace(/^\w/, (char) => char.toUpperCase());
     }
 }
 
