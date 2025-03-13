@@ -34,19 +34,19 @@ const Sidebar: React.FC = () => {
                 path: '/dashboard/timetable',
                 label: 'Timetable',
                 icon: <CalendarOutlined />,
-                subPaths: [{ path: '/view', label: 'View' }]
+                subPaths: [{ path: '/view', label: 'View TimeTable' }]
             },
             {
                 path: '/dashboard/course-materials',
                 label: 'Materials',
                 icon: <BookOutlined />,
-                subPaths: [{ path: '/view', label: 'View' }]
+                subPaths: [{ path: '/view', label: 'View Materials' }]
             },
             {
                 path: '/dashboard/events',
                 label: 'Events',
                 icon: <PartitionOutlined />,
-                subPaths: [{ path: '/view', label: 'View' }]
+                subPaths: [{ path: '/view', label: 'View Events' }]
             },
         ],
         lecturer: [
@@ -59,25 +59,25 @@ const Sidebar: React.FC = () => {
                 path: '/dashboard/timetable',
                 label: 'Timetable',
                 icon: <CalendarOutlined />,
-                subPaths: [{ path: '/view', label: 'View' }]
+                subPaths: [{ path: '/view', label: 'View Timetable' }]
             },
             {
                 path: '/dashboard/course-materials',
                 label: 'Materials',
                 icon: <BookOutlined />,
-                subPaths: [{ path: '/view', label: 'View' }]
+                subPaths: [{ path: '/view', label: 'View Materials' }]
             },
             {
                 path: '/dashboard/resources',
                 label: 'Resources',
                 icon: <InboxOutlined />,
-                subPaths: [{ path: '/request', label: 'Request' }]
+                subPaths: [{ path: '/request', label: 'Request Resources' }]
             },
             {
                 path: '/dashboard/events',
                 label: 'Events',
                 icon: <PartitionOutlined />,
-                subPaths: [{ path: '/view', label: 'View' }]
+                subPaths: [{ path: '/view', label: 'View Events' }]
             },
         ],
         admin: [
@@ -90,13 +90,13 @@ const Sidebar: React.FC = () => {
                 path: '/dashboard/users',
                 label: 'Users',
                 icon: <UsergroupAddOutlined />,
-                subPaths: [{ path: '/manage', label: 'Manage' }]
+                subPaths: [{ path: '/manage', label: 'Manage Users' }]
             },
             {
                 path: '/dashboard/timetable',
                 label: 'Timetable',
                 icon: <CalendarOutlined />,
-                subPaths: [{ path: '/manage', label: 'Manage' }]
+                subPaths: [{ path: '/manage', label: 'Manage Timetable' }]
             },
             {
                 path: '/dashboard/resource',
@@ -104,7 +104,7 @@ const Sidebar: React.FC = () => {
                 icon: <SettingOutlined />,
                 subPaths: [
                     { path: '/dashboard', label: 'Dashboard' },
-                    { path: '/requested-resources', label: 'Requested Resources' }
+                    { path: '/requested-resources', label: 'Requested' }
                 ]
             },
             {
@@ -113,7 +113,7 @@ const Sidebar: React.FC = () => {
                 icon: <ReadOutlined />,
                 subPaths: [
                     { path: '/dashboard', label: 'Dashboard' },
-                    { path: '/manage', label: 'Manage' }
+                    { path: '/manage', label: 'Manage Courses' }
                 ]
             },
         ],
