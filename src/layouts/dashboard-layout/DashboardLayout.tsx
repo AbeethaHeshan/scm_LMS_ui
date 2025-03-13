@@ -13,7 +13,6 @@ export const DashboardLayout = (props: Props) => {
         <SideBar />
       </Layout>
 
-
       {/* Main content area */}
       <div style={{ width: '100%',padding:15 }}>
         <Outlet />

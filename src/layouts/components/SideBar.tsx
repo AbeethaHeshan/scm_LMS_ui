@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useApplicationContext } from '../../context/ApplicationContext';
 import { CalendarOutlined, BookOutlined, PartitionOutlined, InboxOutlined, UsergroupAddOutlined, SettingOutlined, ReadOutlined, DashboardOutlined } from '@ant-design/icons';
 import Sider from 'antd/es/layout/Sider';
-import { Menu } from 'antd';
+import { Menu, Typography } from 'antd';
 import { useLocation, useNavigate } from 'react-router';
 
 interface NavItem {
@@ -191,6 +191,7 @@ const Sidebar: React.FC = () => {
             theme="light"
             style={{ boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}
         >
+            <Typography style={{textAlign:'center',margin:30}}>LMS ICON</Typography>
             <Menu
                 mode="inline"
                 defaultOpenKeys={openKeys}

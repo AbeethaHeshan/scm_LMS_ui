@@ -6,3 +6,28 @@ body {
     'Segoe UI',
     sans-serif;
 }
+
+:root {
+  all: unset;
+  display: block;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button, input, textarea, select {
+  all: unset;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
