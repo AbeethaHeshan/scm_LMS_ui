@@ -1,52 +1,56 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface User {
-    role: string;
-    id?: string;
-    email: string;
-    password?: string;  // remoe this in future
+  role: string;
+  id?: string;
+  email: string;
+  password?: string; // remoe this in future
 }
 
 interface ApplicationContextType {
-    user: User | null;
-    setUser: (user: User | null) => void;
-    logout: () => void;
+  user: User | null;
+  setUser: (user: User | null) => void;
+  logout: () => void;
 }
 
-const ApplicationContext = createContext<ApplicationContextType | undefined>(undefined);
-
+const ApplicationContext = createContext<ApplicationContextType | undefined>(
+  undefined,
+);
 
 interface ApplicationProviderProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
-export const ApplicationProvider: React.FC<ApplicationProviderProps> = ({ children }) => {
-    const [user, setUser] = useState<User | null>(null);
+export const ApplicationProvider: React.FC<ApplicationProviderProps> = ({
+  children,
+}) => {
+  const [user, setUser] = useState<User | null>(null);
 
-    const logout = () => {
-        setUser(null);
-    };
+  const logout = () => {
+    setUser(null);
+  };
 
-    const value = {
-        user,
-        setUser,
-        logout,
-    };
+  const value = {
+    user,
+    setUser,
+    logout,
+  };
 
-    return (
-        <ApplicationContext.Provider value={value}>
-            {children}
-        </ApplicationContext.Provider>
-    );
+  return (
+    <ApplicationContext.Provider value={value}>
+      {children}
+    </ApplicationContext.Provider>
+  );
 };
 
-
 export const useApplicationContext = (): ApplicationContextType => {
-    const context = useContext(ApplicationContext);
+  const context = useContext(ApplicationContext);
 
-    if (context === undefined) {
-        throw new Error('useApplicationContext must be used within an ApplicationProvider');
-    }
+  if (context === undefined) {
+    throw new Error(
+      'useApplicationContext must be used within an ApplicationProvider',
+    );
+  }
 
-    return context;
+  return context;
 };

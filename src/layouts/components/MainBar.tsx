@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+type Props = {};
 
 function MainBar({}: Props) {
-  return (
-    <div>MainBar</div>
-  )
+  return <div>MainBar</div>;
 }
 
-export default MainBar
+export default MainBar;
