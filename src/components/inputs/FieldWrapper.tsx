@@ -1,21 +1,38 @@
-import React, { ReactNode } from "react";
-import clsx from "clsx";
+import React, { ReactNode } from 'react';
+import clsx from 'clsx';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { Typography, Space } from 'antd';
+const { Text } = Typography;
 
 interface FieldWrapperProps {
-    label?: string;
-    error?: string | undefined;
-    children: ReactNode;
-    className?: string;
+  label?: string;
+  error?: string | undefined;
+  children: ReactNode;
+  className?: string;
 }
 
 const FieldWrapper: React.FC<FieldWrapperProps> = ({ label, error, children, className }) => {
-    return (
-        <div className={clsx("flex flex-col gap-2", className)}>
-            {label && <label className="text-sm font-medium text-gray-700">{label}</label>}
-            {children}
-            {error && <p className="text-red-500 text-xs">{error}</p>}
+
+  return (
+    <div className={clsx(className)} style={{ marginBottom: '7px',marginTop:'7px' }}>
+      {label && (
+        <div>
+          <Text type="secondary">{label}</Text>
         </div>
-    );
+      )}
+      <div>
+        {children}
+      </div>
+      {error && (
+        <div style={{ marginTop: '2px' }}>
+          <Space>
+            <ExclamationCircleOutlined style={{ color: '#ff4d4f' }} />
+            <Text type="danger">{error}</Text>
+          </Space>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default FieldWrapper;

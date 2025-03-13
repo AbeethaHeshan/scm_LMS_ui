@@ -5,14 +5,18 @@ import TextField from '../components/inputs/TextField';
 import { RegisterOptions, FieldValues, UseFormRegisterReturn } from 'react-hook-form';
 const Option = Select.Option;
 type Props = {};
-import { useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form';
 import Validation from '../utils/Validations';
 
-
-export default function Test({ }: Props) {
+export default function Test({}: Props) {
   const te = useTheme();
 
-  const { register, handleSubmit, formState: { errors }, control } = useForm({})
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm({});
   const { showSuccess, showError } = useAlert();
 
   function handleChange(value) {
@@ -28,8 +32,8 @@ export default function Test({ }: Props) {
   }
 
   const onSubmit = (data: any) => {
-    console.log('Form data:', data)
-  }
+    console.log('Form data:', data);
+  };
 
   return (
     <div>
@@ -40,7 +44,7 @@ export default function Test({ }: Props) {
           <TextField
             control={control}
             label="Phone Number"
-            {...Validation.apply(register, "phone", {
+            {...Validation.apply(register, 'phone', {
               required: true,
               phone: true,
             })}
@@ -50,7 +54,7 @@ export default function Test({ }: Props) {
           <TextField
             control={control}
             label="Email"
-            {...Validation.apply(register, "email", {
+            {...Validation.apply(register, 'email', {
               required: true,
               email: true,
             })}
@@ -60,15 +64,17 @@ export default function Test({ }: Props) {
           <TextField
             control={control}
             label="Age"
-            {...Validation.apply(register, "age", {
+            {...Validation.apply(register, 'age', {
               required: true,
               onlyNumbers: true,
-              range: { min: 18, max: 100 }
+              range: { min: 18, max: 100 },
             })}
             error={errors.age}
           />
 
-          <Button type="primary" htmlType="submit">Submit</Button>
+          <Button type="primary" htmlType="submit" style={{marginTop:'5px'}}>
+            Submit
+          </Button>
         </form>
       </div>
     </div>
