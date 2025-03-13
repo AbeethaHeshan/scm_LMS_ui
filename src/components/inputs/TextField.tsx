@@ -9,7 +9,7 @@ import {
 import FieldWrapper from './FieldWrapper';
 
 interface TextFieldProps {
-  label: string;
+  label?: string;
   name: string;
   placeholder: string;
   control: Control<any>;

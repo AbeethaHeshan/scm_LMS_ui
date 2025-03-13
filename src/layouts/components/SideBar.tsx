@@ -31,7 +31,6 @@ const Sidebar: React.FC = () => {
     ],
   };
 
-  // Get the correct navigation list based on user role
   const userNavItems = navItems[userRole] || [];
 
   return (

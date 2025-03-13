@@ -55,11 +55,11 @@ export const lightTheme: ThemeConfig = {
     fontSize: 14,
 
     //Border radius
-    borderRadius: 4,
+    borderRadius: 7,
   },
   components: {
     Button: {
-      borderRadius: 4,
+      borderRadius: 7,
       controlHeight: 36,
       colorText: '#FFFFFF',
       colorPrimary: brandColors.primary,
