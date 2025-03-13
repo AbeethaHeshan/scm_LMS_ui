@@ -1,17 +1,21 @@
 import React from 'react';
 import { Outlet } from 'react-router';
 import SideBar from '../components/SideBar';
+import { Layout } from 'antd';
 
 type Props = {};
 
 export const DashboardLayout = (props: Props) => {
   return (
-    <div className="" style={{ display: 'flex', flexDirection: 'row' }}>
+    <div style={{ display: 'flex', flexDirection: 'row' ,margin:0 ,padding:0,minHeight:'100vh'}}>
       {/* Sidebar */}
-      <SideBar />
+      <Layout>
+        <SideBar />
+      </Layout>
+
 
       {/* Main content area */}
-      <div style={{ width: '100%' }}>
+      <div style={{ width: '100%',padding:15 }}>
         <Outlet />
       </div>
     </div>

@@ -11,6 +11,7 @@ export const MainRoutes = () => {
 
       <Route path="dashboard" element={<DashboardLayout />}>
         <Route index element={<Test />} />
+        
       </Route>
       <Route path="*" element={<Navigate to="/auth/login" replace />} />
     </Routes>

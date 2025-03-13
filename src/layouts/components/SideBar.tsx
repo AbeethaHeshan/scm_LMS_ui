@@ -1,93 +1,206 @@
 // src/components/Sidebar.tsx
-import React from 'react';
-import { NavLink } from 'react-router';
+import React, { useEffect, useState } from 'react';
 import { useApplicationContext } from '../../context/ApplicationContext';
+import { CalendarOutlined, BookOutlined, PartitionOutlined, InboxOutlined, UsergroupAddOutlined, SettingOutlined, ReadOutlined, DashboardOutlined } from '@ant-design/icons';
+import Sider from 'antd/es/layout/Sider';
+import { Menu } from 'antd';
+import { useLocation, useNavigate } from 'react-router';
 
 interface NavItem {
-  path: string;
-  label: string;
-  icon: string;
+    path: string;
+    label: string;
+    icon: React.ReactNode;
+    subPaths?: { path: string; label: string }[];
 }
 
 const Sidebar: React.FC = () => {
-  const { user } = useApplicationContext();
-  const userRole = localStorage.getItem('role') || user?.role;
+    const { user } = useApplicationContext();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-  const navItems: Record<string, NavItem[]> = {
-    student: [
-      { path: '/timetable', label: 'Timetable', icon: '📅' },
-      { path: '/course-materials', label: 'Materials', icon: '📚' },
-      { path: '/events', label: 'Events', icon: '🎉' },
-    ],
-    lecturer: [
-      { path: '/timetable', label: 'Timetable', icon: '📅' },
-      { path: '/update-course-materials', label: 'Edit Materials', icon: '✍️' },
-      { path: '/request-resources', label: 'Request Items', icon: '📦' },
-      { path: '/events', label: 'Events', icon: '🎉' },
-    ],
-    admin: [
-      { path: '/register-user', label: 'Users', icon: '👥' },
-      { path: '/manage-timetable', label: 'Timetable', icon: '🗓️' },
-      { path: '/resource-allocation', label: 'Resources', icon: '⚙️' },
-      { path: '/course-manage', label: 'Courses', icon: '📖' },
-    ],
-  };
+    const [defaultSelectedKeys, setDefaultSelectedKeys] = useState<string[]>(['/dashboard']);
 
-  const userNavItems = navItems[userRole] || [];
+    const storedUser = localStorage.getItem('user');
+    const userRole = storedUser ? JSON.parse(storedUser).role : user?.role;
 
-  return (
-    <div className="w-64 h-full bg-gray-100 border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 flex flex-col">
-      {/* Logo area */}
-      <div className="h-16 flex items-center justify-center border-b border-gray-200 dark:border-gray-700">
-        <h1 className="text-xl font-bold capitalize">{userRole} Dashboard</h1>
-      </div>
+    const navItems: Record<string, NavItem[]> = {
+        student: [
+            {
+                path: '/dashboard',
+                label: 'Dashboard',
+                icon: <DashboardOutlined />
+            },
+            {
+                path: '/dashboard/timetable',
+                label: 'Timetable',
+                icon: <CalendarOutlined />,
+                subPaths: [{ path: '/view', label: 'View' }]
+            },
+            {
+                path: '/dashboard/course-materials',
+                label: 'Materials',
+                icon: <BookOutlined />,
+                subPaths: [{ path: '/view', label: 'View' }]
+            },
+            {
+                path: '/dashboard/events',
+                label: 'Events',
+                icon: <PartitionOutlined />,
+                subPaths: [{ path: '/view', label: 'View' }]
+            },
+        ],
+        lecturer: [
+            {
+                path: '/dashboard',
+                label: 'Dashboard',
+                icon: <DashboardOutlined />
+            },
+            {
+                path: '/dashboard/timetable',
+                label: 'Timetable',
+                icon: <CalendarOutlined />,
+                subPaths: [{ path: '/view', label: 'View' }]
+            },
+            {
+                path: '/dashboard/course-materials',
+                label: 'Materials',
+                icon: <BookOutlined />,
+                subPaths: [{ path: '/view', label: 'View' }]
+            },
+            {
+                path: '/dashboard/resources',
+                label: 'Resources',
+                icon: <InboxOutlined />,
+                subPaths: [{ path: '/request', label: 'Request' }]
+            },
+            {
+                path: '/dashboard/events',
+                label: 'Events',
+                icon: <PartitionOutlined />,
+                subPaths: [{ path: '/view', label: 'View' }]
+            },
+        ],
+        admin: [
+            {
+                path: '/dashboard',
+                label: 'Dashboard',
+                icon: <DashboardOutlined />
+            },
+            {
+                path: '/dashboard/users',
+                label: 'Users',
+                icon: <UsergroupAddOutlined />,
+                subPaths: [{ path: '/manage', label: 'Manage' }]
+            },
+            {
+                path: '/dashboard/timetable',
+                label: 'Timetable',
+                icon: <CalendarOutlined />,
+                subPaths: [{ path: '/manage', label: 'Manage' }]
+            },
+            {
+                path: '/dashboard/resource',
+                label: 'Resources',
+                icon: <SettingOutlined />,
+                subPaths: [
+                    { path: '/dashboard', label: 'Dashboard' },
+                    { path: '/requested-resources', label: 'Requested Resources' }
+                ]
+            },
+            {
+                path: '/dashboard/courses',
+                label: 'Courses',
+                icon: <ReadOutlined />,
+                subPaths: [
+                    { path: '/dashboard', label: 'Dashboard' },
+                    { path: '/manage', label: 'Manage' }
+                ]
+            },
+        ],
+    };
 
-      {/* Navigation */}
-      <nav className="flex-1 p-4 overflow-y-auto">
-        <ul className="space-y-2">
-          {userNavItems.map((item) => (
-            <li key={item.path}>
-              <NavLink
-                to={item.path}
-                className={({ isActive }) =>
-                  `flex items-center p-3 rounded-lg ${
-                    isActive
-                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200'
-                      : 'hover:bg-gray-200 dark:hover:bg-gray-700'
-                  }`
+    const roleNavItems = navItems[userRole as keyof typeof navItems] || [];
+
+    const getMenuItems = () => {
+        return roleNavItems.map((item) => {
+            const children = item.subPaths?.map((subPath) => ({
+                key: `${item.path}${subPath.path}`,
+                label: subPath.label,
+                onClick: () => navigate(`${item.path}${subPath.path}`),
+            }));
+
+            return {
+                key: item.path,
+                icon: item.icon,
+                label: item.label,
+                children: children,
+                onClick: !item.subPaths ? () => navigate(item.path) : undefined,
+            };
+        });
+    };
+
+    // Find the currently selected menu item based on the URL
+    const findSelectedKeys = () => {
+        const currentPath = location.pathname;
+        const openKeys: string[] = [];
+        const selectedKeys: string[] = [];
+
+        // If it's exactly dashboard path, select dashboard
+        if (currentPath === '/dashboard') {
+            selectedKeys.push('/dashboard');
+            return { openKeys, selectedKeys };
+        }
+
+        // Otherwise look for matching paths
+        roleNavItems.forEach(item => {
+            if (currentPath.startsWith(item.path)) {
+                openKeys.push(item.path);
+
+                // Handle parent path exact match
+                if (currentPath === item.path) {
+                    selectedKeys.push(item.path);
                 }
-              >
-                <span className="mr-3">{item.icon}</span>
-                {item.label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
 
-      {/* User profile section */}
-      <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-        <div className="flex items-center">
-          <div className="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
-            <span>U</span>
-          </div>
-          <div className="ml-3">
-            <p className="text-sm font-medium">User Name</p>
-            <button
-              className="text-xs text-red-500 hover:text-red-700"
-              onClick={() => {
-                localStorage.removeItem('token');
-                localStorage.removeItem('role');
-                window.location.href = '/auth/login';
-              }}
-            >
-              Logout
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+                // Handle subpaths
+                item.subPaths?.forEach(subPath => {
+                    if (currentPath === `${item.path}${subPath.path}`) {
+                        selectedKeys.push(`${item.path}${subPath.path}`);
+                    }
+                });
+            }
+        });
+
+        // If no match found, default to dashboard
+        if (selectedKeys.length === 0 && currentPath.includes('/dashboard')) {
+            selectedKeys.push('/dashboard');
+        }
+
+        return { openKeys, selectedKeys };
+    };
+
+    const { openKeys, selectedKeys } = findSelectedKeys();
+
+    // Update defaultSelectedKeys when location changes
+    useEffect(() => {
+        setDefaultSelectedKeys(selectedKeys);
+    }, [location.pathname]);
+
+    return (
+        <Sider
+            width={200}
+            theme="light"
+            style={{ boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}
+        >
+            <Menu
+                mode="inline"
+                defaultOpenKeys={openKeys}
+                defaultSelectedKeys={defaultSelectedKeys}
+                selectedKeys={selectedKeys}
+                style={{ height: 'calc(100% - 64px)', borderRight: 0 }}
+                items={getMenuItems()}
+            />
+        </Sider>
+    );
 };
 
 export default Sidebar;

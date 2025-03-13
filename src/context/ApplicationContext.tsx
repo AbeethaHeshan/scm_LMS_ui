@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 interface User {
   role: string;
   id?: string;
   email: string;
-  password?: string; // remoe this in future
+  password?: string; // remove this in future
 }
 
 interface ApplicationContextType {
@@ -24,10 +24,23 @@ interface ApplicationProviderProps {
 export const ApplicationProvider: React.FC<ApplicationProviderProps> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
+
+  const [user, setUser] = useState<User | null>(() => {
+    const savedUser = localStorage.getItem('user');
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [user]);
 
   const logout = () => {
     setUser(null);
+    // localStorage.removeItem('user'); // Not needed due to the useEffect
   };
 
   const value = {
