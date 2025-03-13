@@ -1,4 +1,4 @@
-import { Button, Select } from 'antd';
+import { Button, Select, Typography } from 'antd';
 import { useTheme } from '../context/theme/Theme.context';
 import { useAlert } from '../hooks/useAlert';
 import TextField from '../components/inputs/TextField';
@@ -35,7 +35,7 @@ export default function Test({}: Props) {
   return (
     <div>
       <div>
-        <h2>Form Validation Example</h2>
+        <Typography>Form Validation Example</Typography>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField

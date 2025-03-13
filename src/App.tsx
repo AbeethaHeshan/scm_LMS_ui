@@ -1,12 +1,12 @@
 import { ToastNotification } from './components/feedback-notifications/ToastNotification';
 import { ThemeProvider } from './context/theme/Theme.context';
-import Test from './pages/Test.';
 import './index.css';
+import { MainRoutes } from './routes/main.routes';
 
 function App() {
   return (
     <ThemeProvider defaultTheme="light">
-      <Test />
+      <MainRoutes/>
       <ToastNotification />
     </ThemeProvider>
   );
