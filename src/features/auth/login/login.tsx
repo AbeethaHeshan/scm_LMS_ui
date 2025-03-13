@@ -3,6 +3,11 @@ import { Form, Input, Button, Typography } from 'antd';
 import { useForm } from 'react-hook-form';
 import TextField from '../../../components/inputs/TextField';
 import Validation from '../../../utils/Validations';
+import mockData from '../../../assets/mocks/auth-mock.json';
+import { useAlert } from '../../../hooks/useAlert';
+import { useApplicationContext } from '../../../context/ApplicationContext';
+import { useNavigate } from 'react-router';
+
 
 const { Text } = Typography;
 
@@ -12,23 +17,39 @@ interface LoginForm {
 }
 
 const Login: React.FC = () => {
+
     const {
         register,
         handleSubmit,
         formState: { errors },
         control,
-    } = useForm({});
+    } = useForm<LoginForm>({});
 
+    const { showSuccess, showError } = useAlert();
+    const { setUser , user } = useApplicationContext();
+    const navigate = useNavigate();
+    
     const onSubmit = (data: LoginForm) => {
-        console.log('Login Data:', data);
+        
+        const currentUser = mockData.users.find(
+            (u) => u.email === data.email && u.password === data.password
+        );
+
+        if (currentUser) {
+            setUser(currentUser);
+            navigate('/dashboard');
+        } else {
+             showError("Email or password is incorrect. Please try again.");
+        }
     };
+
 
     return (
         <div>
             <div style={{ maxWidth: 400, height: 350, padding: 22, boxShadow: '0 0 10px rgba(0,0,0,0.1)', borderRadius: 8, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, margin: 'auto' }}>
                 <Typography.Title level={2} style={{ textAlign: 'center' }}>Login</Typography.Title>
-                <Form layout="vertical">
-                    <div style={{ display: 'flex', flexDirection: 'column', rowGap: 10 }}>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div style={{ display: 'flex', flexDirection: 'column', rowGap: 8 }}>
                         <TextField
                             placeholder={'Email'}
                             control={control}
@@ -55,14 +76,13 @@ const Login: React.FC = () => {
                             </div>
                         </div>
 
-                        <Button type="primary" htmlType="submit" block style={{ marginTop: 15 }}>
+                        <Button type="primary" htmlType="submit" block style={{ marginTop: 13 }}>
                             Login
                         </Button>
                     </div>
+                </form>
 
-                </Form>
-
-                <div style={{ textAlign: 'center', marginTop: 40 }}>
+                <div style={{ textAlign: 'center', marginTop: 35 }}>
                     <Text type="secondary">
                         Don't have an account? <a href="/register">Create Account</a>
                     </Text>
@@ -70,7 +90,6 @@ const Login: React.FC = () => {
                 </div>
             </div>
         </div>
-
     );
 };
 
