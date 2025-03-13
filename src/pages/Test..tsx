@@ -2,9 +2,6 @@ import { Button, Select } from 'antd';
 import { useTheme } from '../context/theme/Theme.context';
 import { useAlert } from '../hooks/useAlert';
 import TextField from '../components/inputs/TextField';
-import { RegisterOptions, FieldValues, UseFormRegisterReturn } from 'react-hook-form';
-const Option = Select.Option;
-type Props = {};
 import { useForm } from 'react-hook-form';
 import Validation from '../utils/Validations';
 
@@ -42,6 +39,7 @@ export default function Test({}: Props) {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
+            placeholder={''}
             control={control}
             label="Phone Number"
             {...Validation.apply(register, 'phone', {
@@ -52,6 +50,7 @@ export default function Test({}: Props) {
           />
 
           <TextField
+            placeholder={''}
             control={control}
             label="Email"
             {...Validation.apply(register, 'email', {
@@ -62,6 +61,7 @@ export default function Test({}: Props) {
           />
 
           <TextField
+            placeholder={''}
             control={control}
             label="Age"
             {...Validation.apply(register, 'age', {
@@ -72,7 +72,7 @@ export default function Test({}: Props) {
             error={errors.age}
           />
 
-          <Button type="primary" htmlType="submit" style={{marginTop:'5px'}}>
+          <Button type="primary" htmlType="submit" style={{ marginTop: '5px' }}>
             Submit
           </Button>
         </form>

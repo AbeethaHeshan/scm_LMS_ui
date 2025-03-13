@@ -64,7 +64,10 @@ export const ToastNotification: React.FC = () => {
             showIcon
             closable
             onClose={() => handleClose(alert.id)}
-            style={{ width: '100%', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}
+            style={{
+              width: '100%',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+            }}
           />
         </AnimatedAlertWrapper>
       ))}

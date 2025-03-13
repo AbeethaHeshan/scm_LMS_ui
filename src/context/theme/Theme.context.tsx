@@ -1,7 +1,19 @@
 // Theme.context.tsx
-import React, { createContext, useContext, useState, useEffect, useMemo, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useMemo,
+  ReactNode,
+} from 'react';
 import { ConfigProvider } from 'antd';
-import { lightTheme, darkTheme, fontSizes, fontFamilies } from '../../configs/theme.config';
+import {
+  lightTheme,
+  darkTheme,
+  fontSizes,
+  fontFamilies,
+} from '../../configs/theme.config';
 
 type ThemeMode = 'light' | 'dark';
 
@@ -34,7 +46,8 @@ const useThemeState = (defaultTheme: ThemeMode) => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  const toggleTheme = () =>
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
 
   return { theme, setTheme, toggleTheme };
 };
@@ -50,10 +63,15 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 }) => {
   const { theme, setTheme, toggleTheme } = useThemeState(defaultTheme);
 
-  const currentTheme = useMemo(() => (theme === 'light' ? lightTheme : darkTheme), [theme]);
+  const currentTheme = useMemo(
+    () => (theme === 'light' ? lightTheme : darkTheme),
+    [theme],
+  );
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme, fontSizes, fontFamilies }}>
+    <ThemeContext.Provider
+      value={{ theme, setTheme, toggleTheme, fontSizes, fontFamilies }}
+    >
       <ConfigProvider theme={currentTheme}>{children}</ConfigProvider>
     </ThemeContext.Provider>
   );

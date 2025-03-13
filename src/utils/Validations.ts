@@ -11,12 +11,21 @@ type ValidationRules = {
 };
 
 class Validation {
-  static apply(register: UseFormRegister<any>, fieldName: string, rules: ValidationRules) {
-    const validationRules: RegisterOptions = { ...Validation.buildRules(fieldName, rules) };
+  static apply(
+    register: UseFormRegister<any>,
+    fieldName: string,
+    rules: ValidationRules,
+  ) {
+    const validationRules: RegisterOptions = {
+      ...Validation.buildRules(fieldName, rules),
+    };
     return register(fieldName, validationRules);
   }
 
-  private static buildRules(fieldName: string, rules: ValidationRules): RegisterOptions {
+  private static buildRules(
+    fieldName: string,
+    rules: ValidationRules,
+  ): RegisterOptions {
     const validationRules: RegisterOptions = {};
     const formattedFieldName = Validation.capitalize(fieldName);
 
@@ -25,7 +34,10 @@ class Validation {
     }
 
     if (rules.range) {
-      Object.assign(validationRules, Validation.getRangeRules(formattedFieldName, rules.range));
+      Object.assign(
+        validationRules,
+        Validation.getRangeRules(formattedFieldName, rules.range),
+      );
     }
 
     if (rules.onlyNumbers) {
@@ -64,10 +76,16 @@ class Validation {
   ): RegisterOptions {
     const rangeRules: RegisterOptions = {};
     if (range.min !== undefined) {
-      rangeRules.min = { value: range.min, message: `${fieldName} must be at least ${range.min}` };
+      rangeRules.min = {
+        value: range.min,
+        message: `${fieldName} must be at least ${range.min}`,
+      };
     }
     if (range.max !== undefined) {
-      rangeRules.max = { value: range.max, message: `${fieldName} must be at most ${range.max}` };
+      rangeRules.max = {
+        value: range.max,
+        message: `${fieldName} must be at most ${range.max}`,
+      };
     }
     return rangeRules;
   }

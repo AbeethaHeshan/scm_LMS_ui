@@ -11,23 +11,39 @@ interface FieldWrapperProps {
   className?: string;
 }
 
-const FieldWrapper: React.FC<FieldWrapperProps> = ({ label, error, children, className }) => {
-
+const FieldWrapper: React.FC<FieldWrapperProps> = ({
+  label,
+  error,
+  children,
+  className,
+}) => {
   return (
-    <div className={clsx(className)} style={{ marginBottom: '7px',marginTop:'7px' }}>
+    <div
+      className={clsx(className)}
+      style={{ marginBottom: '7px', marginTop: '7px' }}
+    >
       {label && (
         <div>
-          <Text type="secondary">{label}</Text>
+          <Text type="secondary" style={{ fontWeight: 450 }}>
+            {label}
+          </Text>
         </div>
       )}
-      <div>
-        {children}
-      </div>
+      <div>{children}</div>
       {error && (
         <div style={{ marginTop: '2px' }}>
-          <Space>
-            <ExclamationCircleOutlined style={{ color: '#ff4d4f' }} />
-            <Text type="danger">{error}</Text>
+          <Space size={4}>
+            <ExclamationCircleOutlined
+              style={{
+                color: '#ff4d4f',
+                fontSize: '13px',
+                position: 'relative',
+                bottom: '1px',
+              }}
+            />
+            <Text type="danger" style={{ fontSize: '13px' }}>
+              {error}
+            </Text>
           </Space>
         </div>
       )}
