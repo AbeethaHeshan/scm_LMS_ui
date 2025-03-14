@@ -6,11 +6,24 @@ import {
 } from '@ant-design/icons';
 import { Avatar, Badge, Dropdown, Layout, Space } from 'antd';
 import React from 'react';
+import { useApplicationContext } from '../../context/ApplicationContext';
 
 type Props = {};
 
 function MainBar({}: Props) {
-  const { Header, Sider, Content } = Layout;
+  const { Header} = Layout;
+  const {logout} =  useApplicationContext();
+
+  const handleMenuClick = ({ key }) => {
+    if (key === 'logout') {
+      logout()
+    } else if (key === 'profile') {
+      
+    } else if (key === 'settings') {
+     
+    }
+  };
+
 
   const userMenu = [
     {
@@ -49,6 +62,7 @@ function MainBar({}: Props) {
         </Badge>
 
         <Dropdown
+          
           menu={{
             items: userMenu.map((item) => ({
               ...item,
@@ -56,6 +70,7 @@ function MainBar({}: Props) {
                 style: { fontSize: '14px' },
               }),
               style: { padding: '8px 16px', fontSize: '14px' },
+              onClick: handleMenuClick, 
             })),
           }}
           placement="bottomRight"

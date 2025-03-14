@@ -5,6 +5,7 @@ import React, {
   ReactNode,
   useEffect,
 } from 'react';
+import { useNavigate } from 'react-router';
 
 interface User {
   role: string;
@@ -34,6 +35,7 @@ export const ApplicationProvider: React.FC<ApplicationProviderProps> = ({
     const savedUser = localStorage.getItem('user');
     return savedUser ? JSON.parse(savedUser) : null;
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -45,7 +47,8 @@ export const ApplicationProvider: React.FC<ApplicationProviderProps> = ({
 
   const logout = () => {
     setUser(null);
-    // localStorage.removeItem('user'); // Not needed due to the useEffect
+    localStorage.clear();
+    navigate('/auth/login');
   };
 
   const value = {
