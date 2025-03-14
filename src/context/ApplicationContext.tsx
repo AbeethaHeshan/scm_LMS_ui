@@ -48,7 +48,7 @@ export const ApplicationProvider: React.FC<ApplicationProviderProps> = ({
   const logout = () => {
     setUser(null);
     localStorage.clear();
-    navigate('/auth/login');
+    navigate('/auth/login',{ replace: true });
   };
 
   const value = {
