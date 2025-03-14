@@ -245,7 +245,7 @@ const UserDashboard: React.FC = () => {
     <Card className="user-dashboard" bordered={false}>
       <Row justify="space-between" align="middle" gutter={[0, 16]}>
         <Col>
-          <Title level={3} style={{ marginBottom: 0 }}>
+          <Title level={4} type='secondary' style={{ marginBottom: 0 }}>
             Users Dashboard
           </Title>
         </Col>
