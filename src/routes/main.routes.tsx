@@ -19,7 +19,6 @@ export const MainRoutes = () => {
                 <Route path="dashboard/*" element={<Dashboard />} />
                 <Route path="users/*" element={<UserRoutes />} />
                 <Route path="time-table/*" element={<TimeTableRoutes />} />
-                <Route path="time-table/*" element={<TimeTableRoutes />} />
                 <Route path="resource/*" element={<ResourceRoutes />} />
                 <Route path="events/*" element={<EventRoutes />} />
                 <Route path="course/*" element={<CourseRoutes />} />

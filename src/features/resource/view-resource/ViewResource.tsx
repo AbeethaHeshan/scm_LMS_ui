@@ -1,7 +1,7 @@
 
 const ViewResource = () => {
   return (
-    <div>ViewResource</div>
+    <div>View REquested Resource</div>
   )
 }
 
