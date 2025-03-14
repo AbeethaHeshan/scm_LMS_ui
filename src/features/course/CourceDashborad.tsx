@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+type Props = {};
 
 const CourceDashborad = (props: Props) => {
-  return (
-    <div>CourceDashborad</div>
-  )
-}
+  return <div>CourceDashborad</div>;
+};
 
-export default CourceDashborad
+export default CourceDashborad;

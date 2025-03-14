@@ -1,8 +1,5 @@
-
 const ResourceDashboard = () => {
-  return (
-    <div>ResourceDashboard</div>
-  )
-}
+  return <div>ResourceDashboard</div>;
+};
 
-export default ResourceDashboard
+export default ResourceDashboard;

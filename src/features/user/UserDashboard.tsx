@@ -1,9 +1,5 @@
-
-
 function UserDashboard() {
-  return (
-    <div>UserDashboard</div>
-  )
+  return <div>UserDashboard</div>;
 }
 
-export default UserDashboard
+export default UserDashboard;

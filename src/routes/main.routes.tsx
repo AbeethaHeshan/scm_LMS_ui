@@ -10,20 +10,20 @@ import CourseRoutes from '../features/course/course.routes';
 import Dashboard from '../features/dashboard/Dashboard';
 
 export const MainRoutes = () => {
-    return (
-        <Routes>
-            <Route path="/" element={<Navigate to="/auth/login" replace />} />
-            <Route path="auth/*" element={<AuthRoutes />} />
+  return (
+    <Routes>
+      <Route path="/" element={<Navigate to="/auth/login" replace />} />
+      <Route path="auth/*" element={<AuthRoutes />} />
 
-            <Route element={<DashboardLayout />}>
-                <Route path="dashboard/*" element={<Dashboard />} />
-                <Route path="users/*" element={<UserRoutes />} />
-                <Route path="time-table/*" element={<TimeTableRoutes />} />
-                <Route path="resource/*" element={<ResourceRoutes />} />
-                <Route path="events/*" element={<EventRoutes />} />
-                <Route path="course/*" element={<CourseRoutes />} />
-            </Route>
-            <Route path="*" element={<Navigate to="/auth/login" replace />} />
-        </Routes>
-    );
+      <Route element={<DashboardLayout />}>
+        <Route path="dashboard/*" element={<Dashboard />} />
+        <Route path="users/*" element={<UserRoutes />} />
+        <Route path="time-table/*" element={<TimeTableRoutes />} />
+        <Route path="resource/*" element={<ResourceRoutes />} />
+        <Route path="events/*" element={<EventRoutes />} />
+        <Route path="course/*" element={<CourseRoutes />} />
+      </Route>
+      <Route path="*" element={<Navigate to="/auth/login" replace />} />
+    </Routes>
+  );
 };

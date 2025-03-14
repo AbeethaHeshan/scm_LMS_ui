@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+type Props = {};
 
 const ManageCource = (props: Props) => {
-  return (
-    <div>ManageCource</div>
-  )
-}
+  return <div>ManageCource</div>;
+};
 
-export default ManageCource
+export default ManageCource;

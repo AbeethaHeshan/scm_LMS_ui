@@ -1,8 +1,5 @@
-
 const RequestResource = () => {
-  return (
-    <div>Requests</div>
-  )
-}
+  return <div>Requests</div>;
+};
 
-export default RequestResource
+export default RequestResource;

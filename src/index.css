@@ -12,17 +12,23 @@ body {
   display: block;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-button, input, textarea, select {
+button,
+input,
+textarea,
+select {
   all: unset;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -30,4 +36,3 @@ a {
   text-decoration: none;
   color: inherit;
 }
-

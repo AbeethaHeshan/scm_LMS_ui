@@ -1,7 +1,5 @@
 const ViewTimeTable = () => {
-  return (
-    <div>ViewTimeTable</div>
-  )
-}
+  return <div>ViewTimeTable</div>;
+};
 
-export default ViewTimeTable
+export default ViewTimeTable;

@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+type Props = {};
 
 const CreateEvents = (props: Props) => {
-  return (
-    <div>CreateEvents</div>
-  )
-}
+  return <div>CreateEvents</div>;
+};
 
-export default CreateEvents
+export default CreateEvents;

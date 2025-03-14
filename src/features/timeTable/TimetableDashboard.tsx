@@ -1,9 +1,5 @@
-
-
 const TimetableDashboard = () => {
-  return (
-    <div>TimetableDashboard</div>
-  )
-}
+  return <div>TimetableDashboard</div>;
+};
 
-export default TimetableDashboard
+export default TimetableDashboard;

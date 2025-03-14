@@ -1,8 +1,5 @@
-
 const ManageTimetable = () => {
-  return (
-    <div>ManageTimetable</div>
-  )
-}
+  return <div>ManageTimetable</div>;
+};
 
-export default ManageTimetable
+export default ManageTimetable;

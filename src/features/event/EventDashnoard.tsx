@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+type Props = {};
 
 const EventDashnoard = (props: Props) => {
-  return (
-    <div>EventDashnoard</div>
-  )
-}
+  return <div>EventDashnoard</div>;
+};
 
-export default EventDashnoard
+export default EventDashnoard;

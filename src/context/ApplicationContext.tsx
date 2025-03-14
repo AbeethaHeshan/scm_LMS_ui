@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from 'react';
 
 interface User {
   role: string;
@@ -24,7 +30,6 @@ interface ApplicationProviderProps {
 export const ApplicationProvider: React.FC<ApplicationProviderProps> = ({
   children,
 }) => {
-
   const [user, setUser] = useState<User | null>(() => {
     const savedUser = localStorage.getItem('user');
     return savedUser ? JSON.parse(savedUser) : null;

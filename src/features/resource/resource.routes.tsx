@@ -7,11 +7,11 @@ const ResourceRoutes = () => {
   return (
     <Routes>
       <Route path="*" element={<Navigate to="/resource" replace />} />
-      <Route index path='dashboard' element={<ResourceDashboard />} />
-      <Route path='request-resource' element={<RequestResource />} />
+      <Route index path="dashboard" element={<ResourceDashboard />} />
+      <Route path="request-resource" element={<RequestResource />} />
       <Route path="view-resource" element={<ViewResource />} />
     </Routes>
   );
-}
+};
 
 export default ResourceRoutes;

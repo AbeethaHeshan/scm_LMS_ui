@@ -1,8 +1,5 @@
-
 const ViewResource = () => {
-  return (
-    <div>View REquested Resource</div>
-  )
-}
+  return <div>View REquested Resource</div>;
+};
 
-export default ViewResource
+export default ViewResource;

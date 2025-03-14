@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+type Props = {};
 
 const ManageUsers = (props: Props) => {
-  return (
-    <div>ManageUsers</div>
-  )
-}
+  return <div>ManageUsers</div>;
+};
 
-export default ManageUsers
+export default ManageUsers;

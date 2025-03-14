@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+type Props = {};
 
 const ViewEvents = (props: Props) => {
-  return (
-    <div>ViewEvents</div>
-  )
-}
+  return <div>ViewEvents</div>;
+};
 
-export default ViewEvents
+export default ViewEvents;
